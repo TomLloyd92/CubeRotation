@@ -30,4 +30,9 @@ private:
 	Time elapsed;
 
 	float rotationAngle = 0.0f;
+
+	//Gamestate
+	bool translationOn = true;
+	bool rotationOn = false;
+	bool scaleOn = false;
 };
