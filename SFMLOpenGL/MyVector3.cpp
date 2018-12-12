@@ -352,3 +352,18 @@ MyVector3::operator sf::Vector2u()
 	}
 	return sf::Vector2u{ static_cast<unsigned>(newx),static_cast<unsigned>(newy) };
 }
+
+double MyVector3::getX()
+{
+	return x;
+}
+
+double MyVector3::getY()
+{
+	return y;
+}
+
+double MyVector3::getZ()
+{
+	return z;
+}

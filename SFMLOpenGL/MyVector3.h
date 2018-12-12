@@ -13,9 +13,7 @@
 class MyVector3
 {
 public:
-	double x;
-	double y;
-	double z;
+	
 
 	MyVector3();
 	~MyVector3();
@@ -64,6 +62,15 @@ public:
 	operator sf::Vector2u();
 	operator sf::Vector3i() { return sf::Vector3i{ static_cast<int>(x),static_cast<int>(y) ,static_cast<int>(z)}; };
 	operator sf::Vector3f() { return sf::Vector3f{ static_cast<float>(x),static_cast<float>(y) ,static_cast<float>(z) }; };
+
+	double getX();
+	double getY();
+	double getZ();
+
+private:
+	double x;
+	double y;
+	double z;
 
 };
 

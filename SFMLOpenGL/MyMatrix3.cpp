@@ -29,15 +29,15 @@ MyMatrix3::MyMatrix3(double t_a11, double t_a12, double t_a13, double t_a21, dou
 }
 
 MyMatrix3::MyMatrix3(MyVector3 row1, MyVector3 row2, MyVector3 row3) :
-	m11{ row1.x },
-	m12{ row1.y },
-	m13{ row1.z },
-	m21{ row2.x },
-	m22{ row2.y },
-	m23{ row2.z },
-	m31{ row3.x },
-	m32{ row3.y},
-	m33{ row3.z }
+	m11{ row1.getX() },
+	m12{ row1.getY() },
+	m13{ row1.getZ() },
+	m21{ row2.getX() },
+	m22{ row2.getY() },
+	m23{ row2.getZ() },
+	m31{ row3.getX() },
+	m32{ row3.getY() },
+	m33{ row3.getZ() }
 {
 }
 
@@ -200,13 +200,16 @@ MyMatrix3 MyMatrix3::rotationX(const double t_angleRadians)
 		0.0 , std::sin(t_angleRadians), std::cos(t_angleRadians)};
 }
 
+/*
 MyMatrix3 MyMatrix3::translation(const MyVector3 t_displacement)
 {
 	return MyMatrix3{
-		1.0 , 0.0 , t_displacement.x,
-		0.0 , 1.0 , t_displacement.y,
+		1.0 , 0.0 , t_displacement.getX(),
+		0.0 , 1.0 , t_displacement.getY(),
 		0.0 , 0.0 , 1.0	};
 }
+*/
+
 
 MyMatrix3 MyMatrix3::scale(const double t_scalingfactor)
 {
