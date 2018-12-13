@@ -11,15 +11,13 @@ bool updatable = false;
 gpp::Vector3 v3;
 
 //Vectors Front Face
-MyVector3 vecArrayWithAllTheLads[24]{ {1.0,1.0,-5.0 }, {-1.0,1.0,-5.0 }, {-1.0,-1.0,-5.0 }, { 1.0,1.0,-5.0 }, //Front Face
+MyVector3 vecArray[24]{				  {1.0,1.0,-5.0 }, {-1.0,1.0,-5.0 }, {-1.0,-1.0,-5.0 }, { 1.0,1.0,-5.0 }, //Front Face
 									  {1.0,1.0,-15.0}, { -1.0,1.0,-15.0 }, { -1.0f, -1.0f, -15.0f }, { 1.0f, -1.0f, -15.0f },
 									  {-1.0f, 1.0f,-5.0f}, {-1.0f, 1.0f, -15.0f}, {-1.0f, -1.0f, -15.0f}, {-1.0f, -1.0f, -5.0f},
 									  { 1.0f, 1.0f, -5.0f }, { 1.0f, 1.0f, -15.0f }, { 1.0f, -1.0f, -15.0f }, { 1.0f, -1.0f, -5.0f },
-									  {}
-
-
-
-									};
+									  { -1.0f, 1.0f, -5.0f }, { -1.0f, 1.0f, -15.0f }, {1.0f, 1.0f, -15.0f}, { 1.0f, 1.0f, -5.0f },
+									  { -1.0f, -1.0f, -5.0f }, {-1.0f, -1.0f, -15.0f }, { 1.0f, -1.0f, -15.0f }, { 1.0f, -1.0f, -5.0f }
+						};
 
 /*
 MyVector3 frontFaceOne{ 1.0,1.0,-5.0 };
@@ -52,12 +50,13 @@ MyVector3 rightFaceThree{ 1.0f, -1.0f, -15.0f };
 MyVector3 rightFaceFour{ 1.0f, -1.0f, -5.0f };
 */
 
-
+/*
 //Vector Top Side
 MyVector3 topFaceOne{ -1.0f, 1.0f, -5.0f };
 MyVector3 topFaceTwo{ -1.0f, 1.0f, -15.0f };
 MyVector3 topFaceThree{ 1.0f, 1.0f, -15.0f };
 MyVector3 topFaceFour{ 1.0f, 1.0f, -5.0f };
+*/
 
 //Vector Bot Side
 MyVector3 botFaceOne{ -1.0f, -1.0f, -5.0f };
@@ -66,7 +65,13 @@ MyVector3 botFaceThree{ 1.0f, -1.0f, -15.0f };
 MyVector3 botFaceFour{ 1.0f, -1.0f, -5.0f };
 
 //Translation Vectors
-MyVector3 movingCubeRight{ .01,0,0 };
+MyVector3 movingCubeRight{ .001,0,0 };
+MyVector3 movingCubeLeft{ -.001,0,0 };
+MyVector3 movingCubeUp{ 0,0.001,0 };
+MyVector3 movingCubeDown{ 0,-0.001,0 };
+
+//Scale Vecs
+MyVector3 increasScale{ 1.01,1.01,1 };
 
 
 
@@ -122,45 +127,44 @@ void Game::initialize()
 		
 		//Front Face
 		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(frontFaceOne.getX(), frontFaceOne.getY(), frontFaceOne.getZ());
-		glVertex3f(frontFaceTwo.getX(), frontFaceTwo.getY(), frontFaceTwo.getZ());
-		glVertex3f(frontFaceThree.getX(), frontFaceThree.getY(), frontFaceThree.getZ());
-		glVertex3f(frontFaceFour.getX(), frontFaceFour.getY(), frontFaceFour.getZ());
+		glVertex3f(vecArray[0].getX(), vecArray[0].getY(), vecArray[0].getZ());
+		glVertex3f(vecArray[1].getX(), vecArray[1].getY(), vecArray[1].getZ());
+		glVertex3f(vecArray[2].getX(), vecArray[2].getY(), vecArray[2].getZ());
+		glVertex3f(vecArray[3].getX(), vecArray[3].getY(), vecArray[3].getZ());
 
 		//Back Face
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(backFaceOne.getX(), backFaceOne.getY(), backFaceOne.getZ());
-		glVertex3f(backFaceTwo.getX(), backFaceTwo.getY(), backFaceTwo.getZ());
-		glVertex3f(backFaceThree.getX(), backFaceThree.getY(), backFaceThree.getZ());
-		glVertex3f(backFaceFour.getX(), backFaceFour.getY(), backFaceFour.getZ());
-		
+		glVertex3f(vecArray[4].getX(), vecArray[4].getY(), vecArray[4].getZ());
+		glVertex3f(vecArray[5].getX(), vecArray[5].getY(), vecArray[5].getZ());
+		glVertex3f(vecArray[6].getX(), vecArray[6].getY(), vecArray[6].getZ());
+		glVertex3f(vecArray[7].getX(), vecArray[7].getY(), vecArray[7].getZ());
+
 		//Left fACE
 		glColor3f(1.0f, 0.0f, 0.0f);     // Red
-		glVertex3f(leftFaceOne.getX(), leftFaceOne.getY(), leftFaceOne.getZ());
-		glVertex3f(leftFaceTwo.getX(), leftFaceTwo.getY(), leftFaceTwo.getZ());
-		glVertex3f(leftFaceThree.getX(), leftFaceThree.getY(), leftFaceThree.getZ());
-		glVertex3f(leftFaceFour.getX(),leftFaceFour.getY(), leftFaceFour.getZ());
+		glVertex3f(vecArray[8].getX(), vecArray[8].getY(), vecArray[8].getZ());
+		glVertex3f(vecArray[9].getX(), vecArray[9].getY(), vecArray[9].getZ());
+		glVertex3f(vecArray[10].getX(), vecArray[10].getY(), vecArray[10].getZ());
+		glVertex3f(vecArray[11].getX(), vecArray[11].getY(), vecArray[11].getZ());
 
 		//Right Face
 		glColor3f(1.0f, 0.5f, 0.0f);     // Orange
-		glVertex3f(rightFaceOne.getX(), rightFaceOne.getY(), rightFaceOne.getZ());
-		glVertex3f(rightFaceTwo.getX(), rightFaceTwo.getY(), rightFaceTwo.getZ());
-		glVertex3f(rightFaceThree.getX(), rightFaceThree.getY(), rightFaceThree.getZ());
-		glVertex3f(rightFaceFour.getX(), rightFaceFour.getY(), rightFaceFour.getZ());
+		glVertex3f(vecArray[12].getX(), vecArray[12].getY(), vecArray[12].getZ());
+		glVertex3f(vecArray[13].getX(), vecArray[13].getY(), vecArray[13].getZ());
+		glVertex3f(vecArray[14].getX(), vecArray[14].getY(), vecArray[14].getZ());
+		glVertex3f(vecArray[15].getX(), vecArray[15].getY(), vecArray[15].getZ());
 
 		//Top Side
 		glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
-		glVertex3f(topFaceOne.getX(), topFaceOne.getY(), topFaceOne.getZ());
-		glVertex3f(topFaceTwo.getX(), topFaceTwo.getY(), topFaceTwo.getZ());
-		glVertex3f(topFaceThree.getX(), topFaceThree.getY(), topFaceThree.getZ());
-		glVertex3f(topFaceFour.getX(), topFaceFour.getY(), topFaceFour.getZ());
+		glVertex3f(vecArray[16].getX(), vecArray[16].getY(), vecArray[16].getZ());
+		glVertex3f(vecArray[17].getX(), vecArray[17].getY(), vecArray[17].getZ());
+		glVertex3f(vecArray[18].getX(), vecArray[18].getY(), vecArray[18].getZ());
+		glVertex3f(vecArray[19].getX(), vecArray[19].getY(), vecArray[19].getZ());
 
 		//Bottom Side
 		glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
-		glVertex3f(botFaceOne.getX(), botFaceOne.getY(), botFaceOne.getZ());
-		glVertex3f(botFaceTwo.getX(), botFaceTwo.getY(), botFaceTwo.getZ());
-		glVertex3f(botFaceThree.getX(), botFaceThree.getY(), botFaceThree.getZ());
-		glVertex3f(botFaceFour.getX(), botFaceFour.getY(), botFaceFour.getZ());
+		glVertex3f(vecArray[20].getX(), vecArray[20].getY(), vecArray[20].getZ());
+		glVertex3f(vecArray[21].getX(), vecArray[21].getY(), vecArray[21].getZ());
+		glVertex3f(vecArray[22].getX(), vecArray[22].getY(), vecArray[22].getZ());
+		glVertex3f(vecArray[23].getX(), vecArray[23].getY(), vecArray[23].getZ());
 		
 	}
 	glEnd();
@@ -174,47 +178,46 @@ void Game::update()
 	{
 
 		//Front Face
+		//Front Face
 		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(frontFaceOne.getX(), frontFaceOne.getY(), frontFaceOne.getZ());
-		glVertex3f(frontFaceTwo.getX(), frontFaceTwo.getY(), frontFaceTwo.getZ());
-		glVertex3f(frontFaceThree.getX(), frontFaceThree.getY(), frontFaceThree.getZ());
-		glVertex3f(frontFaceFour.getX(), frontFaceFour.getY(), frontFaceFour.getZ());
+		glVertex3f(vecArray[0].getX(), vecArray[0].getY(), vecArray[0].getZ());
+		glVertex3f(vecArray[1].getX(), vecArray[1].getY(), vecArray[1].getZ());
+		glVertex3f(vecArray[2].getX(), vecArray[2].getY(), vecArray[2].getZ());
+		glVertex3f(vecArray[3].getX(), vecArray[3].getY(), vecArray[3].getZ());
 
 		//Back Face
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(backFaceOne.getX(), backFaceOne.getY(), backFaceOne.getZ());
-		glVertex3f(backFaceTwo.getX(), backFaceTwo.getY(), backFaceTwo.getZ());
-		glVertex3f(backFaceThree.getX(), backFaceThree.getY(), backFaceThree.getZ());
-		glVertex3f(backFaceFour.getX(), backFaceFour.getY(), backFaceFour.getZ());
+		glVertex3f(vecArray[4].getX(), vecArray[4].getY(), vecArray[4].getZ());
+		glVertex3f(vecArray[5].getX(), vecArray[5].getY(), vecArray[5].getZ());
+		glVertex3f(vecArray[6].getX(), vecArray[6].getY(), vecArray[6].getZ());
+		glVertex3f(vecArray[7].getX(), vecArray[7].getY(), vecArray[7].getZ());
 
 		//Left fACE
 		glColor3f(1.0f, 0.0f, 0.0f);     // Red
-		glVertex3f(leftFaceOne.getX(), leftFaceOne.getY(), leftFaceOne.getZ());
-		glVertex3f(leftFaceTwo.getX(), leftFaceTwo.getY(), leftFaceTwo.getZ());
-		glVertex3f(leftFaceThree.getX(), leftFaceThree.getY(), leftFaceThree.getZ());
-		glVertex3f(leftFaceFour.getX(), leftFaceFour.getY(), leftFaceFour.getZ());
+		glVertex3f(vecArray[8].getX(), vecArray[8].getY(), vecArray[8].getZ());
+		glVertex3f(vecArray[9].getX(), vecArray[9].getY(), vecArray[9].getZ());
+		glVertex3f(vecArray[10].getX(), vecArray[10].getY(), vecArray[10].getZ());
+		glVertex3f(vecArray[11].getX(), vecArray[11].getY(), vecArray[11].getZ());
 
 		//Right Face
 		glColor3f(1.0f, 0.5f, 0.0f);     // Orange
-		glVertex3f(rightFaceOne.getX(), rightFaceOne.getY(), rightFaceOne.getZ());
-		glVertex3f(rightFaceTwo.getX(), rightFaceTwo.getY(), rightFaceTwo.getZ());
-		glVertex3f(rightFaceThree.getX(), rightFaceThree.getY(), rightFaceThree.getZ());
-		glVertex3f(rightFaceFour.getX(), rightFaceFour.getY(), rightFaceFour.getZ());
+		glVertex3f(vecArray[12].getX(), vecArray[12].getY(), vecArray[12].getZ());
+		glVertex3f(vecArray[13].getX(), vecArray[13].getY(), vecArray[13].getZ());
+		glVertex3f(vecArray[14].getX(), vecArray[14].getY(), vecArray[14].getZ());
+		glVertex3f(vecArray[15].getX(), vecArray[15].getY(), vecArray[15].getZ());
 
 		//Top Side
 		glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
-		glVertex3f(topFaceOne.getX(), topFaceOne.getY(), topFaceOne.getZ());
-		glVertex3f(topFaceTwo.getX(), topFaceTwo.getY(), topFaceTwo.getZ());
-		glVertex3f(topFaceThree.getX(), topFaceThree.getY(), topFaceThree.getZ());
-		glVertex3f(topFaceFour.getX(), topFaceFour.getY(), topFaceFour.getZ());
+		glVertex3f(vecArray[16].getX(), vecArray[16].getY(), vecArray[16].getZ());
+		glVertex3f(vecArray[17].getX(), vecArray[17].getY(), vecArray[17].getZ());
+		glVertex3f(vecArray[18].getX(), vecArray[18].getY(), vecArray[18].getZ());
+		glVertex3f(vecArray[19].getX(), vecArray[19].getY(), vecArray[19].getZ());
 
 		//Bottom Side
 		glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
-		glVertex3f(botFaceOne.getX(), botFaceOne.getY(), botFaceOne.getZ());
-		glVertex3f(botFaceTwo.getX(), botFaceTwo.getY(), botFaceTwo.getZ());
-		glVertex3f(botFaceThree.getX(), botFaceThree.getY(), botFaceThree.getZ());
-		glVertex3f(botFaceFour.getX(), botFaceFour.getY(), botFaceFour.getZ());
-
+		glVertex3f(vecArray[20].getX(), vecArray[20].getY(), vecArray[20].getZ());
+		glVertex3f(vecArray[21].getX(), vecArray[21].getY(), vecArray[21].getZ());
+		glVertex3f(vecArray[22].getX(), vecArray[22].getY(), vecArray[22].getZ());
+		glVertex3f(vecArray[23].getX(), vecArray[23].getY(), vecArray[23].getZ());
 	}
 	glEnd();
 	glEndList();
@@ -233,53 +236,62 @@ void Game::update()
 			updatable = false;
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		bool translationOn = true;
+		bool scaleOn = false;
+		bool rotationOn = false;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		bool translationOn = false;
+		bool scaleOn = true;
+		bool rotationOn = false;
+	}
+
+
 	if (translationOn == true)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			std::cout << "DEW IT" << std::endl;
-
-			std::cout << frontFaceOne.getX() << std::endl;
-
-			//Vector Front Face
-			frontFaceOne = frontFaceOne + movingCubeRight;
-			frontFaceTwo = frontFaceTwo + movingCubeRight;
-			frontFaceThree = frontFaceThree + movingCubeRight;
-			frontFaceFour = frontFaceFour + movingCubeRight;
-
-			//Vector Back Face
-			backFaceOne = backFaceOne + movingCubeRight;
-			backFaceTwo = backFaceOne + movingCubeRight;
-			backFaceThree = backFaceOne + movingCubeRight;
-			backFaceFour = backFaceFour + movingCubeRight;
-
-			//Vector Left Face
-			leftFaceOne = leftFaceOne + movingCubeRight;
-			leftFaceTwo = leftFaceTwo + movingCubeRight;
-			leftFaceThree = leftFaceThree + movingCubeRight;
-			leftFaceFour = leftFaceFour + movingCubeRight;
-
-			//Vector Right Face
-			rightFaceOne = rightFaceOne + movingCubeRight;
-			rightFaceTwo = rightFaceTwo + movingCubeRight;
-			rightFaceThree = rightFaceThree + movingCubeRight;
-			rightFaceFour = rightFaceFour + movingCubeRight;
-
-			//Vector Top Side
-			topFaceOne = topFaceOne + movingCubeRight;
-			topFaceTwo = topFaceTwo + movingCubeRight;
-			topFaceThree = topFaceThree + movingCubeRight;
-			topFaceFour = topFaceFour + movingCubeRight;
-
-			//Vector Bot Side
-			botFaceOne = botFaceOne + movingCubeRight;
-			botFaceTwo = botFaceTwo + movingCubeRight;
-			botFaceThree = botFaceThree + movingCubeRight;
-			botFaceFour = botFaceFour + movingCubeRight;
+			for (int i = 0; i < 24; i++)
+			{
+				vecArray[i] = vecArray[i] + movingCubeRight;
+			}
 		}
-
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			for (int i = 0; i < 24; i++)
+			{
+				vecArray[i] = vecArray[i] + movingCubeLeft;
+			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			for (int i = 0; i < 24; i++)
+			{
+				vecArray[i] = vecArray[i] + movingCubeUp;
+			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			for (int i = 0; i < 24; i++)
+			{
+				vecArray[i] = vecArray[i] + movingCubeDown;
+			}
+		}
 	}
 
+	if (scaleOn == true)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			for (int i = 0; i < 24; i++)
+			{
+				//MyVector3 newScale = vecArray[i].dot(increasScale);				
+			}
+		}
+	}
 	
 	if (updatable)
 	{
